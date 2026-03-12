@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useCartStore } from "@/store/cart_actions";
+import { useCartStore } from "src/store/cart_actions";
 
 export default function AddToCartWithQty({ product }: { product: any }) {
 

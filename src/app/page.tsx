@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import ProductList from './components/ProductList';
+import ProductList from 'src/components/ProductList';
 import { FaFire, FaRocket, FaChevronRight } from 'react-icons/fa'; // Cài react-icons
 
 export default function HomePage() {
@@ -20,7 +20,7 @@ export default function HomePage() {
     <main className='flex min-h-screen flex-col items-center bg-[#f5f5fa] pb-12'>
       {/* 1. HERO BANNER - Nâng cấp với Gradient và Nút bấm */}
       <section className='mt-6 w-full max-w-[1120px] px-4'>
-        <div className='relative flex h-72 w-full flex-col items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 to-blue-400 text-white shadow-xl'>
+        <div className='relative flex h-72 w-full flex-col items-center justify-center overflow-hidden rounded-3xl bg-linear-to-r from-blue-600 to-blue-400 text-white shadow-xl'>
           <div className='absolute right-[-10%] top-[-20%] h-64 w-64 rounded-full bg-white/10 blur-3xl'></div>
           <div className='absolute bottom-[-20%] left-[-10%] h-64 w-64 rounded-full bg-black/10 blur-3xl'></div>
 

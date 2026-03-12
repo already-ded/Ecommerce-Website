@@ -34,14 +34,14 @@ export default function App() {
       </div>
 
       {/* Main Form Content */}
-      <div className='overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:rounded-[2rem]'>
+      <div className='overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:rounded-4xl'>
         <form onSubmit={handleSave} className='space-y-8 p-5 md:p-8'>
           {/* SECTION: HỒ SƠ SHOP */}
           {activeTab === 'profile' && (
             <div className='animate-in slide-in-from-bottom-2 space-y-8 duration-300'>
               <div className='flex flex-col items-center gap-6 border-b border-slate-50 pb-8 md:flex-row md:items-start md:gap-10'>
                 <div className='group relative'>
-                  <div className='flex h-28 w-28 items-center justify-center overflow-hidden rounded-[2rem] border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors group-hover:border-sky-400 group-hover:bg-sky-50/30'>
+                  <div className='flex h-28 w-28 items-center justify-center overflow-hidden rounded-4xl border-2 border-dashed border-slate-200 bg-slate-50 text-slate-400 transition-colors group-hover:border-sky-400 group-hover:bg-sky-50/30'>
                     <span className='text-[10px] font-bold uppercase tracking-wider'>Logo Shop</span>
                   </div>
                   <button

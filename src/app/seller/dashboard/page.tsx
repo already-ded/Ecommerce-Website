@@ -30,7 +30,7 @@ export default function SellerDashboardPage() {
 
       <div className='grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3'>
         {/* BIỂU ĐỒ HIỆU SUẤT */}
-        <div className='flex h-full min-h-[350px] flex-col rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm transition-all md:p-7 lg:col-span-2'>
+        <div className='flex h-full min-h-[350px] flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all md:p-7 lg:col-span-2'>
           <div className='mb-6 flex items-center justify-between'>
             <div>
               <h2 className='flex items-center gap-2 text-base font-semibold text-slate-700 md:text-lg'>
@@ -59,7 +59,7 @@ export default function SellerDashboardPage() {
         </div>
 
         {/* KHU VỰC: VIỆC CẦN LÀM NGAY */}
-        <div className='relative flex flex-col overflow-hidden rounded-[1.5rem] border border-slate-800 bg-slate-900 p-6 shadow-lg md:p-7'>
+        <div className='relative flex flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-lg md:p-7'>
           <div className='relative z-10'>
             <h2 className='mb-6 flex items-center gap-2 text-base font-semibold text-white md:text-lg'>
               <AlertCircle className='text-rose-400' size={18} />

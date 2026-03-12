@@ -1,10 +1,10 @@
 // src/app/product/[id]/page.tsx
 import { notFound } from 'next/navigation';
-import Breadcrumb from '@/src/app/components/Breadcrumbs';
-import RelatedProducts from '@/src/app/components/RelatedProducts';
-import AddToCartWithQty from '@/src/app/components/ui/AddToCart';
-import ProductFeedback from '@/src/app/components/ProductFeedback';
-import ProductImageGallery from '@/src/app/components/ProductImageGallery';
+import Breadcrumb from 'src/components/Breadcrumbs';
+import RelatedProducts from 'src/components/RelatedProducts';
+import AddToCartWithQty from 'src/components/ui/AddToCart';
+import ProductFeedback from 'src/components/ProductFeedback';
+import ProductImageGallery from 'src/components/ProductImageGallery';
 import { FaShieldAlt, FaTruck, FaUndo } from 'react-icons/fa'; // Icon cho chính sách
 
 interface Product {
@@ -87,9 +87,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                   <div className='flex items-center text-[#ffc107] font-bold text-sm'>
                     {product.rating?.toFixed(1)} <span className='ml-1 text-[16px]'>★</span>
                   </div>
-                  <div className='h-3 w-[1px] bg-gray-200' />
+                  <div className='h-3 w-px bg-gray-200' />
                   <span className='text-sm text-gray-400 italic underline'>Đã bán 1.2k</span>
-                  <div className='h-3 w-[1px] bg-gray-200' />
+                  <div className='h-3 w-px bg-gray-200' />
                   <span className={`text-sm font-medium ${product.stock > 0 ? 'text-green-600' : 'text-red-500'}`}>
                     {product.stock > 0 ? `Còn ${product.stock} sản phẩm` : 'Hết hàng'}
                   </span>

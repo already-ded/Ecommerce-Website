@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ProductList from "@/src/app/components/ProductList";
-import VoucherList from "../components/VoucherList";
+import ProductList from "src/components/ProductList";
+import VoucherList from "src/components/VoucherList";
 
 export default function SalePage() {
 

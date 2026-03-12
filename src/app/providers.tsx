@@ -2,9 +2,9 @@
 import React, { ReactNode } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
-import { AuthProvider } from './context/AuthContext';
-import { Header } from './components/header';
-import Footer from './components/footer';
+import { AuthProvider } from 'src/context/AuthContext';
+import { Header } from 'src/components/header';
+import Footer from 'src/components/footer';
 type Props = {
   children: ReactNode;
 };

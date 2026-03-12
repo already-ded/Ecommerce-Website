@@ -87,7 +87,7 @@ export function NotiDropdown() {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className='animate-in fade-in slide-in-from-top-2 absolute right-0 top-full z-[110] mt-3 w-[360px] overflow-hidden rounded-2xl border border-[#eee] bg-white shadow-[0_15px_40px_rgba(0,0,0,0.15)] duration-300 max-sm:fixed max-sm:inset-x-0 max-sm:top-16 max-sm:mt-0 max-sm:w-full max-sm:rounded-none'>
+        <div className='animate-in fade-in slide-in-from-top-2 absolute right-0 top-full z-110 mt-3 w-[360px] overflow-hidden rounded-2xl border border-[#eee] bg-white shadow-[0_15px_40px_rgba(0,0,0,0.15)] duration-300 max-sm:fixed max-sm:inset-x-0 max-sm:top-16 max-sm:mt-0 max-sm:w-full max-sm:rounded-none'>
           {/* Header */}
           <div className='flex items-center justify-between border-b border-[#f0f0f0] bg-[#fcfcfd] px-5 py-4'>
             <h3 className='text-sm font-bold tracking-widest text-gray-800'>Thông báo mới</h3>

@@ -3,9 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from 'src/context/AuthContext';
 import { FaSpinner, FaArrowRight, FaTrashAlt } from 'react-icons/fa';
-import { useCartStore } from '@/store/cart_actions';
+import { useCartStore } from 'src/store/cart_actions';
 import { useRouter } from 'next/navigation';
 
 const GRID_LAYOUT = 'grid grid-cols-[50px_1fr_150px_150px_150px_100px] items-center gap-4';

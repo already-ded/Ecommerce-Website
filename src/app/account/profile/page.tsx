@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import {
   FaUserCircle,
   FaMapMarkerAlt,
@@ -117,10 +117,10 @@ export default function ProfilePage() {
   };
 
   const openEditModal = (field: 'phone' | 'email') => {
-    setEditingField(field);
-    setTempValue(field === 'phone' ? profile.phone : profile.email);
-    setShowContactModal(true);
-  };
+  setEditingField(field);
+  setTempValue(field === 'phone' ? profile.phone ?? '' : profile.email ?? '');
+  setShowContactModal(true);
+};
 
   const handleSaveContact = async () => {
     if (!tempValue) {
@@ -325,7 +325,7 @@ export default function ProfilePage() {
 
           {/* Phone */}
           <div className='flex items-center border-b border-[#f0f0f0] py-4 md:py-5'>
-            <FaPhone className='mr-4 w-7 flex-shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
+            <FaPhone className='mr-4 w-7 shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
             <div className='flex-1'>
               <span className='block text-sm text-[#777] md:text-base'>Số điện thoại</span>
               <strong className='text-sm font-medium text-black md:text-base'>
@@ -341,7 +341,7 @@ export default function ProfilePage() {
 
           {/* Email */}
           <div className='flex items-center border-b border-[#f0f0f0] py-4 md:py-5'>
-            <FaEnvelope className='mr-4 w-7 flex-shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
+            <FaEnvelope className='mr-4 w-7 shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
             <div className='min-w-0 flex-1'>
               <span className='block text-sm text-[#777] md:text-base'>Địa chỉ email</span>
               <strong className='block truncate text-sm font-medium text-black md:text-base'>{profile.email}</strong>
@@ -357,7 +357,7 @@ export default function ProfilePage() {
 
           {/* PIN */}
           <div className='flex items-center border-b border-[#f0f0f0] py-4 md:py-5'>
-            <FaShieldAlt className='mr-4 w-7 flex-shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
+            <FaShieldAlt className='mr-4 w-7 shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
             <div className='flex-1'>
               <span className='block text-sm text-[#777] md:text-base'>Thiết lập mã PIN</span>
             </div>
@@ -368,7 +368,7 @@ export default function ProfilePage() {
 
           {/* Delete Account */}
           <div className='flex items-center py-4 md:py-5'>
-            <FaTrash className='mr-4 w-7 flex-shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
+            <FaTrash className='mr-4 w-7 shrink-0 text-xl text-[#999] md:mr-5 md:text-2xl' />
             <div className='flex-1'>
               <span className='block text-sm text-[#777] md:text-base'>Yêu cầu xóa tài khoản</span>
             </div>
@@ -381,7 +381,7 @@ export default function ProfilePage() {
 
       {/* Contact Edit Modal */}
       {showContactModal && (
-        <div className='animate-in fade-in fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm duration-200 ease-out'>
+        <div className='animate-in fade-in fixed inset-0 z-9999 flex items-center justify-center bg-black/50 backdrop-blur-sm duration-200 ease-out'>
           <div className='animate-in fade-in zoom-in-[0.8] w-[400px] max-w-[90%] overflow-hidden rounded-lg bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]'>
             <div className='flex flex-col gap-5 p-6 md:p-8'>
               <h3 className='m-0 text-base font-medium text-[#333] md:text-lg'>

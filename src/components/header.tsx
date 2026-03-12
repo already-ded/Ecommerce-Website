@@ -6,7 +6,7 @@ import { UserMenu } from './UserMenu';
 import { useRouter } from 'next/navigation';
 import { NotiDropdown } from './NotiDropdown';
 import { FaSearch, FaShoppingCart, FaUser, FaBars, FaTimes } from 'react-icons/fa';
-import { useCartStore } from '@/store/cart_actions';
+import { useCartStore } from  "src/store/cart_actions";
 
 export function Header() {
   const router = useRouter();

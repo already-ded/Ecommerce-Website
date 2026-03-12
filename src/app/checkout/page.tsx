@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useMemo } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from 'src/context/AuthContext';
 import { useSearchParams } from 'next/navigation';
-import { useCartStore } from '@/store/cart_actions';
+import { useCartStore } from 'src/store/cart_actions';
 import Image from 'next/image';
 import { FaMapMarkerAlt, FaChevronLeft, FaExclamationTriangle, FaTicketAlt, FaCreditCard, FaMoneyBillWave, FaSpinner } from 'react-icons/fa';
 import Link from 'next/link';

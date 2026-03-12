@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import {
   FaUser,
   FaMapMarkerAlt,
@@ -31,7 +31,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
   return (
     <nav className='box-border border-r border-[#f0f0f0] pr-0 md:pr-5'>
       {/* Profile Header */}
-      <div className='mb-5 flex items-center gap-3 border-b border-[#f0f0f0] p-3 pb-4 md:gap-[15px] md:p-[10px] md:pb-5'>
+      <div className='mb-5 flex items-center gap-3 border-b border-[#f0f0f0] p-3 pb-4 md:gap-[15px] md:p-2.5 md:pb-5'>
         <img
           src={user?.avatar || 'https://placehold.co/100x100?text=Avatar'}
           alt='Avatar'
@@ -50,7 +50,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
         <Link
           href='/account/profile'
           onClick={handleLinkClick}
-          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-[10px] md:py-3.5 md:text-base ${
+          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-2.5 md:py-3.5 md:text-base ${
             isActive('/account/profile')
               ? 'bg-[#f0f5ff] font-semibold text-[#074262]'
               : 'text-[#333] hover:bg-[#f5f5f5]'
@@ -66,7 +66,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
             <Link
               href='/orders'
               onClick={handleLinkClick}
-              className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-[10px] md:py-3.5 md:text-base ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-2.5 md:py-3.5 md:text-base ${
                 isActive('/account/orders')
                   ? 'bg-[#f0f5ff] font-semibold text-[#074262]'
                   : 'text-[#333] hover:bg-[#f5f5f5]'
@@ -79,7 +79,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
             <Link
               href='/account/payment'
               onClick={handleLinkClick}
-              className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-[10px] md:py-3.5 md:text-base ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-2.5 md:py-3.5 md:text-base ${
                 isActive('/account/payment')
                   ? 'bg-[#f0f5ff] font-semibold text-[#074262]'
                   : 'text-[#333] hover:bg-[#f5f5f5]'
@@ -92,7 +92,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
             <Link
               href='/account/address'
               onClick={handleLinkClick}
-              className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-[10px] md:py-3.5 md:text-base ${
+              className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-2.5 md:py-3.5 md:text-base ${
                 isActive('/account/address')
                   ? 'bg-[#f0f5ff] font-semibold text-[#074262]'
                   : 'text-[#333] hover:bg-[#f5f5f5]'
@@ -108,7 +108,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
         <Link
           href='/account/password'
           onClick={handleLinkClick}
-          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-[10px] md:py-3.5 md:text-base ${
+          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-2.5 md:py-3.5 md:text-base ${
             isActive('/account/password')
               ? 'bg-[#f0f5ff] font-semibold text-[#074262]'
               : 'text-[#333] hover:bg-[#f5f5f5]'
@@ -121,7 +121,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
         <Link
           href='/account/notifications'
           onClick={handleLinkClick}
-          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-[10px] md:py-3.5 md:text-base ${
+          className={`flex items-center gap-3 rounded-lg px-3 py-3 text-sm no-underline transition-colors md:px-2.5 md:py-3.5 md:text-base ${
             isActive('/account/notifications')
               ? 'bg-[#f0f5ff] font-semibold text-[#074262]'
               : 'text-[#333] hover:bg-[#f5f5f5]'
@@ -136,7 +136,7 @@ function AccountSidebar({ onClose }: { onClose?: () => void }) {
           <Link
             href='/admin'
             onClick={handleLinkClick}
-            className='mt-2 flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-[#333] no-underline hover:bg-[#f5f5f5] md:px-[10px] md:py-3.5 md:text-base'>
+            className='mt-2 flex items-center gap-3 rounded-lg px-3 py-3 text-sm text-[#333] no-underline hover:bg-[#f5f5f5] md:px-2.5 md:py-3.5 md:text-base'>
             <FaTachometerAlt /> Trang Admin
           </Link>
         )}

@@ -405,7 +405,7 @@ export default function AdminProductsPage() {
 
       {/* Modal - Responsive */}
       {showModal && (
-        <div className='fixed inset-0 z-[1000] flex items-center justify-center bg-black/50 p-4'>
+        <div className='fixed inset-0 z-1000 flex items-center justify-center bg-black/50 p-4'>
           <div className='max-h-[83vh] w-full max-w-2xl overflow-y-auto rounded-xl bg-white shadow-2xl'>
             <div className='sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 sm:px-6 sm:py-4'>
               <h2 className='flex items-center gap-2 text-lg font-bold text-gray-800 sm:text-xl'>

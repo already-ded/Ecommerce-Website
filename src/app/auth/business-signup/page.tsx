@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import React from 'react';
 import { FaExclamationCircle } from 'react-icons/fa';
-import { useAuth } from 'src/app/context/AuthContext';
+import { useAuth } from 'src/context/AuthContext';
 
 export default function BusinessSignupPage() {
   const { user, isLoggedIn, isLoading: authLoading } = useAuth();

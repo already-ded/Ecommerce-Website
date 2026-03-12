@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-import ProductList from '../components/ProductList';
-import ProductCard, { ProductCardProps } from '../components/ui/ProductCard';
+import ProductList from 'src/components/ProductList';
+import ProductCard, { ProductCardProps } from 'src/components/ui/ProductCard';
 import { Filter, X } from 'lucide-react';
 
 export default function Products() {
@@ -199,7 +199,7 @@ export default function Products() {
                 {[...Array(8)].map((_, i) => (
                   <div
                     key={i}
-                    className='aspect-[3/4] animate-pulse rounded-2xl border border-white bg-white shadow-sm'></div>
+                    className='aspect-3/4 animate-pulse rounded-2xl border border-white bg-white shadow-sm'></div>
                 ))}
               </div>
             ) : filteredProducts.length > 0 ? (
@@ -207,7 +207,7 @@ export default function Products() {
                 <ProductList products={filteredProducts} />
               </div>
             ) : (
-              <div className='flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-100 bg-white p-12 md:rounded-[2rem] md:p-20'>
+              <div className='flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-100 bg-white p-12 md:rounded-4xl md:p-20'>
                 <img
                   src='https://cdn-icons-png.flaticon.com/512/7486/7486744.png'
                   className='mb-4 w-16 opacity-20 md:w-20'

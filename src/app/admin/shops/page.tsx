@@ -311,7 +311,7 @@ export default function ShopsPage() {
 
       {/* MODAL CHI TIẾT SHOP - Tối ưu Mobile padding */}
       {selectedShop && (
-        <div className='fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-2 backdrop-blur-sm md:p-4'>
+        <div className='fixed inset-0 z-100 flex items-center justify-center bg-black/60 p-2 backdrop-blur-sm md:p-4'>
           <div className='flex max-h-[83vh] w-full max-w-4xl flex-col rounded-lg bg-white shadow-2xl md:max-h-[95vh]'>
             <div className='flex items-center justify-between border-b border-gray-200 px-4 py-4 md:px-8 md:py-5'>
               <div className='flex items-center gap-3'>
@@ -400,7 +400,7 @@ export default function ShopsPage() {
 
       {/* MODAL TỪ CHỐI */}
       {showRejectModal && (
-        <div className='fixed inset-0 z-[110] flex items-center justify-center bg-black/60 p-4'>
+        <div className='fixed inset-0 z-110 flex items-center justify-center bg-black/60 p-4'>
           <div className='w-full max-w-md overflow-hidden rounded-lg bg-white shadow-xl'>
             <div className='border-b border-gray-200 bg-gray-50 px-6 py-4 font-bold text-gray-800'>
               Lý do từ chối hồ sơ
@@ -471,7 +471,7 @@ const InfoRow = ({ label, value, icon, isTruncate }: any) => (
 const FormViewItem = ({ label, value, fullWidth }: any) => (
   <div className={fullWidth ? 'w-full' : ''}>
     <p className='mb-1 text-[13px] font-semibold text-gray-400'>{label}</p>
-    <div className='break-words rounded border border-gray-200 bg-gray-50 p-3 text-sm font-medium text-gray-800'>
+    <div className='wrap-break-word rounded border border-gray-200 bg-gray-50 p-3 text-sm font-medium text-gray-800'>
       {value || '---'}
     </div>
   </div>

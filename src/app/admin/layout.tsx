@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ShoppingBag, LayoutDashboard, Users, Store, Settings, LogOut, Menu, X } from 'lucide-react';
-import { useAuth } from 'src/app/context/AuthContext';
+import { useAuth } from 'src/context/AuthContext';
 
 const navigation = [
   { name: 'Tổng quan', href: '/admin', icon: LayoutDashboard },
@@ -31,7 +31,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <div className='min-h-screen bg-gray-50'>
       {/* Header */}
-      <header className='sticky top-0 z-50 bg-gradient-to-r from-[#1159a5] to-[#078edd] text-white shadow-lg'>
+      <header className='sticky top-0 z-50 bg-linear-to-r from-[#1159a5] to-[#078edd] text-white shadow-lg'>
         <div className='mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-4'>
           <div className='flex items-center justify-between'>
             {/* Logo */}

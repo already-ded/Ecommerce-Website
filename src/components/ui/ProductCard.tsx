@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { FC, useState } from 'react';
 import Link from 'next/link';
-import { useCartStore } from '@/store/cart_actions';
+import { useCartStore } from  "src/store/cart_actions";
 import { ShoppingCart, Check, Star } from 'lucide-react';
 
 export interface ProductCardProps {
@@ -68,7 +68,7 @@ const ProductCard: FC<ProductCardProps> = ({
         {/* Phần nội dung */}
         <div className={`flex flex-col gap-1.5 p-3 ${compact ? 'gap-1 p-2' : ''}`}>
           <p
-            className={`line-clamp-2 min-h-[40px] overflow-hidden leading-tight text-slate-800 transition-colors group-hover:text-sky-600 ${compact ? 'text-[12px] font-medium' : 'text-[15px] font-semibold'}`}>
+            className={`line-clamp-2 min-h-10 overflow-hidden leading-tight text-slate-800 transition-colors group-hover:text-sky-600 ${compact ? 'text-[12px] font-medium' : 'text-[15px] font-semibold'}`}>
             {name}
           </p>
 

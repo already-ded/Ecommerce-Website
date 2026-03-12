@@ -256,7 +256,7 @@ export default function OrdersPage() {
 
       {/* MODAL HỦY ĐƠN */}
       {cancelOrderId && (
-        <div className='fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-4'>
+        <div className='fixed inset-0 z-100 flex items-end justify-center p-0 sm:items-center sm:p-4'>
           <div
             className='animate-in fade-in absolute inset-0 cursor-pointer bg-slate-900/40 backdrop-blur-[2px]'
             onClick={() => {

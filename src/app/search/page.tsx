@@ -1,7 +1,7 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ProductCard, { ProductCardProps } from '@/src/app/components/ui/ProductCard';
+import ProductCard, { ProductCardProps } from 'src/components/ui/ProductCard';
 import { FaSearch, FaBoxOpen } from 'react-icons/fa';
 
 export default function SearchPage() {

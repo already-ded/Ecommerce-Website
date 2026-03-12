@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '@/src/app/context/AuthContext';
+import { useAuth } from '@/src/context/AuthContext';
 import {
   FaThLarge,
   FaBox,
@@ -41,16 +41,16 @@ export function SellerSidebar({ isOpen, onClose }: SellerSidebarProps) {
       {/* Lớp nền mờ trên Mobile */}
       {isOpen && (
         <div
-          className='fixed inset-0 z-[100] cursor-pointer bg-black/40 backdrop-blur-sm transition-opacity md:hidden'
+          className='fixed inset-0 z-100 cursor-pointer bg-black/40 backdrop-blur-sm transition-opacity md:hidden'
           onClick={onClose}
         />
       )}
 
       {/* Container Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-[110] flex h-screen w-[260px] flex-col bg-white shadow-xl transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        className={`fixed left-0 top-0 z-110 flex h-screen w-[260px] flex-col bg-white shadow-xl transition-transform duration-300 md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Brand Section - Chỉnh font bớt đậm */}
-        <div className='flex items-center justify-between bg-gradient-to-r from-[#1159a5] to-[#078edd] px-6 py-5 text-white'>
+        <div className='flex items-center justify-between bg-linear-to-r from-[#1159a5] to-[#078edd] px-6 py-5 text-white'>
           <div className='flex items-center gap-3'>
             <div className='rounded-lg bg-white/20 p-2'>
               <FaStore className='text-lg' />

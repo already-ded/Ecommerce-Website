@@ -125,15 +125,15 @@ const Footer: React.FC = () => {
           </h4>
           <div className='space-y-3'>
             <div className='flex items-start text-[11px] leading-tight text-[#ccc] md:text-sm'>
-              <FaLocationDot className='mr-2 mt-1 flex-shrink-0 text-sky-400' size={14} />
+              <FaLocationDot className='mr-2 mt-1 shrink-0 text-sky-400' size={14} />
               <span>Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội</span>
             </div>
             <div className='flex items-center text-[11px] leading-tight text-[#ccc] md:text-sm'>
-              <FaPhone className='mr-2 flex-shrink-0 text-sky-400' size={14} />
+              <FaPhone className='mr-2 shrink-0 text-sky-400' size={14} />
               <span>+84 123 456 789</span>
             </div>
             <div className='flex items-center text-[11px] leading-tight text-[#ccc] md:text-sm'>
-              <FaEnvelope className='mr-2 flex-shrink-0 text-sky-400' size={14} />
+              <FaEnvelope className='mr-2 shrink-0 text-sky-400' size={14} />
               <span>support@tibiki.vn</span>
             </div>
           </div>

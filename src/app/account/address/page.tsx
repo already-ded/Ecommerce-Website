@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { FaPlus, FaCheckCircle } from 'react-icons/fa';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 
 interface Address {
   id: number;
@@ -269,18 +269,18 @@ export default function AddressPage() {
       {/* Modal - Responsive */}
       {showModal && (
         <div
-          className='fixed inset-0 z-[9999] flex items-start justify-center overflow-y-auto bg-black/50 pt-10 md:items-center md:p-4 md:pt-4'
+          className='fixed inset-0 z-9999 flex items-start justify-center overflow-y-auto bg-black/50 pt-10 md:items-center md:p-4 md:pt-4'
           onClick={(e) => {
             if (e.target === e.currentTarget) setShowModal(false);
           }}>
           <div className='flex max-h-[85vh] w-[92%] flex-col overflow-hidden rounded-xl bg-white shadow-[0_4px_20px_rgba(0,0,0,0.15)] md:max-h-[90vh] md:w-[700px] md:max-w-[95%] md:rounded-lg'>
             {/* Drag Handle - Mobile Only */}
-            <div className='flex flex-shrink-0 justify-center py-2 md:hidden'>
+            <div className='flex shrink-0 justify-center py-2 md:hidden'>
               <div className='h-1 w-12 rounded-full bg-gray-300'></div>
             </div>
 
             {/* Modal Header */}
-            <div className='flex flex-shrink-0 items-center justify-between border-b border-[#ebebeb] bg-white px-4 py-3 md:px-6 md:py-4'>
+            <div className='flex shrink-0 items-center justify-between border-b border-[#ebebeb] bg-white px-4 py-3 md:px-6 md:py-4'>
               <h2 className='text-base font-semibold md:text-lg'>{isEditing ? 'Cập nhật địa chỉ' : 'Tạo địa chỉ'}</h2>
               <button
                 type='button'
@@ -345,7 +345,7 @@ export default function AddressPage() {
                   <label className='text-left text-sm font-medium text-[#555] md:text-right md:text-[0.9rem] md:font-normal'>
                     Tỉnh/Thành phố:
                   </label>
-                  <select
+                  <select title='city'
                     name='city'
                     className='box-border w-full rounded border border-[#ccc] px-3 py-2 text-sm text-[#333] outline-none focus:border-blue-600 focus:shadow-[0_0_0_2px_rgba(37,99,235,0.1)] md:py-2.5 md:text-[0.9rem]'
                     value={formData.cityCode}
@@ -365,7 +365,7 @@ export default function AddressPage() {
                   <label className='text-left text-sm font-medium text-[#555] md:text-right md:text-[0.9rem] md:font-normal'>
                     Quận huyện:
                   </label>
-                  <select
+                  <select title='district'
                     name='district'
                     className='box-border w-full rounded border border-[#ccc] px-3 py-2 text-sm text-[#333] outline-none focus:border-blue-600 focus:shadow-[0_0_0_2px_rgba(37,99,235,0.1)] disabled:bg-gray-100 md:py-2.5 md:text-[0.9rem]'
                     value={formData.districtCode}
@@ -386,7 +386,7 @@ export default function AddressPage() {
                   <label className='text-left text-sm font-medium text-[#555] md:text-right md:text-[0.9rem] md:font-normal'>
                     Phường xã:
                   </label>
-                  <select
+                  <select title='ward'
                     name='ward'
                     className='box-border w-full rounded border border-[#ccc] px-3 py-2 text-sm text-[#333] outline-none focus:border-blue-600 focus:shadow-[0_0_0_2px_rgba(37,99,235,0.1)] disabled:bg-gray-100 md:py-2.5 md:text-[0.9rem]'
                     value={formData.wardCode}
@@ -463,7 +463,7 @@ export default function AddressPage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className='flex flex-shrink-0 flex-col-reverse gap-2 border-t border-gray-100 bg-white p-4 md:flex-row md:justify-end md:gap-3 md:p-6'>
+                <div className='flex shrink-0 flex-col-reverse gap-2 border-t border-gray-100 bg-white p-4 md:flex-row md:justify-end md:gap-3 md:p-6'>
                   <button
                     type='button'
                     className='w-full cursor-pointer rounded border border-[#ccc] bg-white px-6 py-2.5 text-sm text-[#555] hover:bg-[#f5f5f5] md:w-auto md:text-[0.9rem]'

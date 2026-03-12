@@ -1,103 +1,111 @@
-import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
-import FacebookProvider from 'next-auth/providers/facebook';
-import CredentialsProvider from 'next-auth/providers/credentials';
-// Import dữ liệu từ nguồn tập trung để đảm bảo tính nhất quán
-import { mockUsers, mockProfiles } from '@/src/data/mockData';
+import NextAuth, { type AuthOptions } from 'next-auth'
+import GoogleProvider from 'next-auth/providers/google'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import bcrypt from 'bcryptjs'
+import type { JWT } from 'next-auth/jwt'
+import type { Session } from 'next-auth'
 
-const handler = NextAuth({
+// Import dữ liệu từ nguồn tập trung
+import { mockUsers, mockProfiles } from '@/src/data/mockData'
+
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID || '',
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET || '',
-    }),
+
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
         email: { label: 'email', type: 'text', placeholder: 'your email' },
         password: { label: 'password', type: 'password', placeholder: 'your password' },
       },
+
       async authorize(credentials) {
-        // 1. Kiểm tra input đầu vào
+
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Vui lòng nhập đầy đủ thông tin');
+          throw new Error('Vui lòng nhập đầy đủ thông tin')
         }
 
-        /**
-         * 2. TÌM KIẾM NGƯỜI DÙNG TRONG DATABASE (MOCK)
-         * Chúng ta tìm trong mảng mockUsers (bao gồm cả User vừa đăng ký xong)
-         */
-        const user = mockUsers.find((u) => u.email === credentials.email && u.password === credentials.password);
+        const email = credentials.email.toLowerCase().trim()
 
-        if (user) {
-          /**
-           * 3. LẤY THÔNG TIN HỒ SƠ BỔ SUNG
-           * Truy xuất từ mảng mockProfiles dựa trên ID người dùng
-           */
-          const profile = mockProfiles[user.id] || {};
+        const user = mockUsers.find(
+          (u: any) => u.email.toLowerCase() === email
+        )
 
-          // Trả về object User đầy đủ để NextAuth đưa vào JWT
-          return {
-            id: user.id,
-            name: profile.fullName || user.email.split('@')[0],
-            email: user.email,
-            role: user.role,
-            shopStatus: user.shopStatus,
-            phone: profile.phone || '',
-            address: profile.address || '',
-            image: profile.avatar || `https://i.pravatar.cc/150?u=${user.id}`,
-          };
+        if (!user) {
+          throw new Error('Email không tồn tại')
         }
 
-        // Nếu không khớp thông tin
-        return null;
+        // 🔑 so sánh password hash
+        const isValidPassword = await bcrypt.compare(
+          credentials.password,
+          user.password
+        )
+
+        if (!isValidPassword) {
+          throw new Error('Sai mật khẩu')
+        }
+
+        const profile = mockProfiles[user.id] || {}
+
+        return {
+          id: user.id,
+          name: profile.fullName || user.email.split('@')[0],
+          email: user.email,
+          role: user.role,
+          shopStatus: user.shopStatus,
+          phone: profile.phone || '',
+          address: profile.address || '',
+          image: profile.avatar || `https://i.pravatar.cc/150?u=${user.id}`,
+        }
       },
     }),
   ],
-  // Sử dụng chiến lược JWT để lưu Session trong Cookie mã hóa
+
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60, // 30 ngày
+    maxAge: 30 * 24 * 60 * 60,
   },
+
   callbacks: {
-    /**
-     * TOKEN CALLBACK:
-     * Lưu các trường tùy chỉnh (role, shopStatus, id...) vào Token JWT
-     */
-    async jwt({ token, user }) {
+
+    async jwt({ token, user }: { token: JWT; user?: any }) {
+
       if (user) {
-        token.id = user.id;
-        token.role = (user as any).role;
-        token.shopStatus = (user as any).shopStatus;
-        token.phone = (user as any).phone;
-        token.address = (user as any).address;
+        token.id = user.id
+        token.role = user.role
+        token.shopStatus = user.shopStatus
+        token.phone = user.phone
+        token.address = user.address
       }
-      return token;
+
+      return token
     },
-    /**
-     * SESSION CALLBACK:
-     * Đưa dữ liệu từ Token vào Session để Frontend (useAuth) có thể truy cập được
-     */
-    async session({ session, token }) {
+
+    async session({ session, token }: { session: Session; token: JWT }) {
+
       if (session.user) {
-        (session.user as any).id = token.id;
-        (session.user as any).role = token.role;
-        (session.user as any).shopStatus = token.shopStatus;
-        (session.user as any).phone = token.phone;
-        (session.user as any).address = token.address;
+        (session.user as any).id = token.id
+        ;(session.user as any).role = token.role
+        ;(session.user as any).shopStatus = token.shopStatus
+        ;(session.user as any).phone = token.phone
+        ;(session.user as any).address = token.address
       }
-      return session;
+
+      return session
     },
   },
+
   pages: {
     signIn: '/auth/signin',
     error: '/auth/error',
   },
-  debug: process.env.NODE_ENV === 'development',
-});
 
-export { handler as GET, handler as POST };
+  debug: process.env.NODE_ENV === 'development',
+}
+
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }

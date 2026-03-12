@@ -302,7 +302,7 @@ export default function SellerOrdersPage() {
 
       {/* Modal Chi tiết đơn hàng - Responsive */}
       {selectedOrder && (
-        <div className='fixed inset-0 z-[1000] flex items-center justify-center bg-black/50 p-4 font-sans'>
+        <div className='fixed inset-0 z-1000 flex items-center justify-center bg-black/50 p-4 font-sans'>
           <div className='animate-in zoom-in-95 flex max-h-[83vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl duration-200'>
             {/* Modal Header */}
             <div className='flex items-center justify-between border-b border-gray-100 bg-gray-50 px-4 py-3 md:px-6 md:py-4'>
