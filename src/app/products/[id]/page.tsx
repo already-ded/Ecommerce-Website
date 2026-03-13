@@ -22,25 +22,28 @@ interface Product {
 }
 
 async function getProduct(id: string): Promise<Product> {
-  const res = await fetch(`/api/products/${id}`, {
-    cache: "no-store",
-  });
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`,
+      { cache: "no-store" }
+    );
 
-  if (!res.ok) {
+    if (!res.ok) return notFound();
+
+    const product = await res.json();
+
+    if (!product.galleryImages || product.galleryImages.length === 0) {
+      product.galleryImages = [
+        product.image,
+        "https://placehold.co/600x600/e2e8f0/111?text=Product",
+        "https://placehold.co/600x600/e2e8f0/111?text=Gallery",
+      ];
+    }
+
+    return product;
+  } catch {
     notFound();
   }
-
-  const product = await res.json();
-
-  if (!product.galleryImages || product.galleryImages.length === 0) {
-    product.galleryImages = [
-      product.image,
-      "https://placehold.co/600x600/e2e8f0/111?text=Product",
-      "https://placehold.co/600x600/e2e8f0/111?text=Gallery",
-    ];
-  }
-
-  return product;
 }
 
 export async function generateMetadata({
