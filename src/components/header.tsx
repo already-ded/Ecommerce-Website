@@ -200,13 +200,6 @@ export function Header() {
           <li>
             <Link
               className='block px-5 py-[15px] font-semibold text-[rgb(1,62,95)] no-underline hover:bg-[rgb(163,218,248)]'
-              href='/contact'>
-              Liên hệ
-            </Link>
-          </li>
-          <li>
-            <Link
-              className='block px-5 py-[15px] font-semibold text-[rgb(1,62,95)] no-underline hover:bg-[rgb(163,218,248)]'
               href='/faq'>
               Hỗ trợ
             </Link>
