@@ -115,7 +115,7 @@ export function Header() {
           {/* Logo */}
           <div className='mr-2 md:mr-[60px]'>
             <Link href='/'>
-              <img src='logo.jpg' alt='Logo' className='h-[35px] md:h-[60px]' />
+              <img src='/logo.jpg' alt='Logo' className='h-[35px] md:h-[60px]' />
             </Link>
           </div>
 
