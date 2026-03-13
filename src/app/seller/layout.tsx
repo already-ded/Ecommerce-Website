@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/src/app/context/AuthContext';
+import { useAuth } from '@/src/context/AuthContext';
 import { SellerSidebar } from './components/SellerSidebar';
 import { FaBars, FaUser } from 'react-icons/fa';
-import { UserMenu } from '../components/UserMenu';
+import { UserMenu } from 'src/components/UserMenu';
 
 /**
  * Layout bảo mật cho Kênh Người Bán
@@ -58,7 +58,7 @@ export default function SellerLayout({ children }: { children: React.ReactNode }
             <span className='text-base font-bold text-slate-800'>Kênh Người Bán</span>
           </div>
           <div className='flex h-8 w-8 items-center justify-center rounded-full'>
-            <UserMenu user={user} />
+           <UserMenu user={user!} />
           </div>
         </header>
 
