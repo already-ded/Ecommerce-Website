@@ -6,6 +6,8 @@ import ProductFeedback from "src/components/ProductFeedback";
 import ProductImageGallery from "src/components/ProductImageGallery";
 import { FaShieldAlt, FaTruck, FaUndo } from "react-icons/fa";
 
+export const dynamic = "force-dynamic";
+
 interface Product {
   id: string;
   name: string;
@@ -20,28 +22,25 @@ interface Product {
 }
 
 async function getProduct(id: string): Promise<Product> {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/api/products/${id}`,
-      { cache: "no-store" }
-    );
+  const res = await fetch(`/api/products/${id}`, {
+    cache: "no-store",
+  });
 
-    if (!res.ok) return notFound();
-
-    const product = await res.json();
-
-    if (!product.galleryImages || product.galleryImages.length === 0) {
-      product.galleryImages = [
-        product.image,
-        "https://placehold.co/600x600/e2e8f0/111?text=Product",
-        "https://placehold.co/600x600/e2e8f0/111?text=Gallery",
-      ];
-    }
-
-    return product;
-  } catch {
+  if (!res.ok) {
     notFound();
   }
+
+  const product = await res.json();
+
+  if (!product.galleryImages || product.galleryImages.length === 0) {
+    product.galleryImages = [
+      product.image,
+      "https://placehold.co/600x600/e2e8f0/111?text=Product",
+      "https://placehold.co/600x600/e2e8f0/111?text=Gallery",
+    ];
+  }
+
+  return product;
 }
 
 export async function generateMetadata({
