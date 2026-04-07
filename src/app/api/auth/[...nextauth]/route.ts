@@ -2,11 +2,10 @@ import NextAuth, { type AuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcryptjs'
-import type { JWT } from 'next-auth/jwt'
-import type { Session } from 'next-auth'
+import { connectDB } from '@/src/lib/mongodb'
+import { User } from '@/src/models/Users' // Đảm bảo import đúng model MongoDB
+import { Profile } from '@/src/models/Profile' // Đảm bảo import đúng model MongoDB
 
-// Import dữ liệu từ nguồn tập trung
-import { mockUsers, mockProfiles } from '@/src/data/mockData'
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -18,27 +17,32 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: { label: 'email', type: 'text', placeholder: 'your email' },
-        password: { label: 'password', type: 'password', placeholder: 'your password' },
+        email: { label: 'email', type: 'text' },
+        password: { label: 'password', type: 'password' },
       },
 
       async authorize(credentials) {
-
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Vui lòng nhập đầy đủ thông tin')
         }
 
-        const email = credentials.email.toLowerCase().trim()
+        // 1. Kết nối DB
+        await connectDB()
 
-        const user = mockUsers.find(
-          (u: any) => u.email.toLowerCase() === email
-        )
+        // 2. Tìm User trong MongoDB
+        const user = await User.findOne({ 
+          email: credentials.email.toLowerCase().trim() 
+        }).lean()
 
         if (!user) {
           throw new Error('Email không tồn tại')
         }
 
-        // 🔑 so sánh password hash
+        // 3. So sánh mật khẩu
+        // Nếu trong file Seed bạn để password là "123" (chưa hash), hãy dùng:
+        // const isValidPassword = credentials.password === user.password;
+        
+        // Nếu đã dùng bcrypt trong Seed, hãy dùng:
         const isValidPassword = await bcrypt.compare(
           credentials.password,
           user.password
@@ -48,17 +52,17 @@ export const authOptions: AuthOptions = {
           throw new Error('Sai mật khẩu')
         }
 
-        const profile = mockProfiles[user.id] || {}
+        // 4. Lấy Profile từ MongoDB
+        const profile = await Profile.findOne({ userId: user._id }).lean()
 
         return {
-          id: user.id,
-          name: profile.fullName || user.email.split('@')[0],
+          id: user._id.toString(),
+          name: profile?.fullName || user.email.split('@')[0],
           email: user.email,
           role: user.role,
           shopStatus: user.shopStatus,
-          phone: profile.phone || '',
-          address: profile.address || '',
-          image: profile.avatar || `https://i.pravatar.cc/150?u=${user.id}`,
+          phone: profile?.phone || '',
+          image: profile?.avatar || `https://i.pravatar.cc/150?u=${user._id}`,
         }
       },
     }),
@@ -66,46 +70,36 @@ export const authOptions: AuthOptions = {
 
   session: {
     strategy: 'jwt',
-    maxAge: 30 * 24 * 60 * 60,
   },
 
   callbacks: {
-
-    async jwt({ token, user }: { token: JWT; user?: any }) {
-
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id
         token.role = user.role
         token.shopStatus = user.shopStatus
-        token.phone = user.phone
-        token.address = user.address
       }
-
+      // Hỗ trợ cập nhật session nhanh khi update profile
+      if (trigger === "update" && session) {
+        return { ...token, ...session.user };
+      }
       return token
     },
 
-    async session({ session, token }: { session: Session; token: JWT }) {
-
+    async session({ session, token }: any) {
       if (session.user) {
-        (session.user as any).id = token.id
-        ;(session.user as any).role = token.role
-        ;(session.user as any).shopStatus = token.shopStatus
-        ;(session.user as any).phone = token.phone
-        ;(session.user as any).address = token.address
+        session.user.id = token.id
+        session.user.role = token.role
+        session.user.shopStatus = token.shopStatus
       }
-
       return session
     },
   },
 
   pages: {
     signIn: '/auth/signin',
-    error: '/auth/error',
   },
-
-  debug: process.env.NODE_ENV === 'development',
 }
 
 const handler = NextAuth(authOptions)
-
 export { handler as GET, handler as POST }
