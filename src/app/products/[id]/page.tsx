@@ -5,6 +5,7 @@ import AddToCartWithQty from "src/components/ui/AddToCart";
 import ProductFeedback from "src/components/ProductFeedback";
 import ProductImageGallery from "src/components/ProductImageGallery";
 import { FaShieldAlt, FaTruck, FaUndo } from "react-icons/fa";
+import { getProductById } from "@/src/lib/product-service"; 
 
 export const dynamic = "force-dynamic";
 
@@ -24,50 +25,22 @@ interface Product {
   category: string;
 }
 
-async function getProduct(id: string): Promise<Product> {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/products/${id}`, { 
-      cache: "no-store" 
-    });
 
-    if (!res.ok) return notFound();
-
-    const product = await res.json();
-
-    // Mapping: Đảm bảo luôn có id (string) từ _id của MongoDB
-    const formattedProduct = {
-      ...product,
-      id: product._id ? product._id.toString() : product.id,
-      galleryImages: product.galleryImages?.length > 0 
-        ? product.galleryImages 
-        : [product.image, "https://placehold.co/600x600/e2e8f0/111?text=No+Image"]
-    };
-
-    return formattedProduct;
-  } catch (error) {
-    console.error("Fetch product error:", error);
-    return notFound();
-  }
-}
-
-// 2. Metadata (SEO)
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  try {
-    const product = await getProduct(id);
-    return {
-      title: `${product.name} | Tibiki`,
-      description: product.description || "Sản phẩm chính hãng giá tốt.",
-    };
-  } catch {
-    return { title: "Sản phẩm không tồn tại" };
-  }
+  const product = await getProductById(id); // Gọi trực tiếp DB
+  
+  if (!product) return { title: "Sản phẩm không tồn tại" };
+  return { title: product.name };
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = await getProduct(id);
+  
+  // Gọi trực tiếp DB, không thông qua API HTTP nữa
+  const product = await getProductById(id); 
+
+  if (!product) return notFound();
 
   // Tính % giảm giá
   const discountPercent = product.oldPrice && product.oldPrice > product.price
